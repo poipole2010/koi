@@ -1,11 +1,11 @@
+import os
 import logging
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
 import discord
 import logging.handlers
 from datetime import datetime
 now = datetime.now()
-
-
+print(os.environ['DISCORD_TOKEN'])
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
 logging.getLogger('discord.http').setLevel(logging.INFO)
