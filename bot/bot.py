@@ -6,7 +6,6 @@ import discord
 import logging.handlers
 from datetime import datetime
 now = datetime.now()
-print(os.environ['DISCORD_TOKEN'])
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
 logging.getLogger('discord.http').setLevel(logging.INFO)
@@ -47,11 +46,14 @@ async def on_message(message):
     if message.content.startswith('>time'):
         await message.channel.send(now)
 
+
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
     if message.content.startswith('>help'):
-        await message.channel.send("WIP")
+        await message.channel.send(">hello - Prints an hello.                                        "
+                                   
+                                   ">time - Tells the time")
 
 client.run('MTE4NjM0MDU2OTM4ODE2NzMzMA.GUCudL.KZbSMIeHCvlM8SUdFew5bNaw2fduFe_qx1WF2A', log_handler=None)
