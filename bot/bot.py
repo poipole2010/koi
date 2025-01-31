@@ -1,4 +1,6 @@
-# program
+# Koi bot - por: Vinícius
+
+# Importando dependencias
 import os
 import logging
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
@@ -8,6 +10,7 @@ from datetime import datetime
 now = datetime.now()
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
+token = os.environ['DISCORD_TOKEN']
 logging.getLogger('discord.http').setLevel(logging.INFO)
 
 handler = logging.handlers.RotatingFileHandler(
@@ -16,7 +19,7 @@ handler = logging.handlers.RotatingFileHandler(
     maxBytes=32 * 1024 * 1024,  # 32 MiB
     backupCount=5,  # Rotate through 5 files
 )
-dt_fmt = '%Y-%m-%d %H:%M:%S'
+dt_fmt = '%d-%m-%Y %H:%M:%S'
 formatter = logging.Formatter('[{asctime}] [{levelname:<8}] {name}: {message}', dt_fmt, style='{')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
@@ -25,12 +28,13 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 client = discord.Client(intents=intents)
-
+# Confirma que o bot iniciou
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
 
-
+# Comandos abaixo
+# >hello:. Manda um olá em inglês.
 @client.event
 async def on_message(message):
     if message.author == client.user:
@@ -38,7 +42,7 @@ async def on_message(message):
 
     if message.content.startswith('>hello'):
         await message.channel.send('Hello!')
-
+# >time: Manda o tempo atual do sistema do servidor
 @client.event
 async def on_message(message):
     if message.author == client.user:
@@ -46,14 +50,13 @@ async def on_message(message):
     if message.content.startswith('>time'):
         await message.channel.send(now)
 
-
+# >help: Manda uma mensagem com os comandos que o bot tem
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
     if message.content.startswith('>help'):
-        await message.channel.send(">hello - Prints an hello.                                        "
-                                   
+        await message.channel.send(">hello - Prints an hello."
                                    ">time - Tells the time")
-
-client.run('MTE4NjM0MDU2OTM4ODE2NzMzMA.GUCudL.KZbSMIeHCvlM8SUdFew5bNaw2fduFe_qx1WF2A', log_handler=None)
+# Inicia o bot
+client.run(token, log_handler=None)
