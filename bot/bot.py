@@ -10,7 +10,7 @@ from datetime import datetime
 now = datetime.now()
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
-token = os.environ['DISCORD_TOKEN']
+token = os.environ["DISCORD_TOKEN"]
 logging.getLogger('discord.http').setLevel(logging.INFO)
 
 handler = logging.handlers.RotatingFileHandler(
@@ -31,7 +31,7 @@ client = discord.Client(intents=intents)
 # Confirma que o bot iniciou
 @client.event
 async def on_ready():
-    print(f'We have logged in as {client.user}')
+    print(f'Logado como: {client.user}')
 
 # Comandos abaixo
 # >hello:. Manda um olá em inglês.
