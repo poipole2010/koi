@@ -1,5 +1,5 @@
 !#/bin/sh
 source ../venv/bin/activate
-export DISCORD_TOKEN="MTE4NjM0MDU2OTM4ODE2NzMzMA.GvuSEb.m4pqjHRqXV8YDe0MWEvG9keL5LgMJdUdSropUU"
+export DISCORD_TOKEN="<insert token here>"
 cd ..
 python -m bot.py
